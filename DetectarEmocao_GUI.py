@@ -129,8 +129,24 @@ class Camera:
         self.cap.release()
         self.mainui.close()
 
+class Home:
+    def __init__(self):
+        self.mainui = loadUi('splash.ui')
+        self.camera = None
+        
+        # Conectar o botão pb_webcam ao método que abre a camera
+        self.mainui.pb_webcam.clicked.connect(self.abrir_camera)
+        self.mainui.pb_webcam.clicked.connect(self.mainui.close)
+        
+        self.mainui.show()
+    
+    def abrir_camera(self):
+        """Abre a janela da câmera com detecção de emoção"""
+        self.camera = Camera()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
+    
     app = QApplication([])
-    main = Camera()
+    main = Home()
     app.exec()
